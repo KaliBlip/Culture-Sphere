@@ -1,0 +1,346 @@
+.enhanced-vr-experience {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.canvas-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Controls Overlay */
+.controls-overlay {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  color: white;
+}
+
+/* VR Button */
+.vr-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 24px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: 2px solid white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.vr-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+/* Cardboard Button */
+.cardboard-button {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  padding: 12px 24px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: 2px solid white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.cardboard-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.cardboard-button svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+/* Cardboard Instructions */
+.cardboard-instructions {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.instructions-content {
+  text-align: center;
+  color: white;
+  padding: 40px;
+}
+
+.instructions-content img {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.instructions-content button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: white;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.instructions-content button:hover {
+  background: #e0e0e0;
+  transform: scale(1.05);
+}
+
+/* FPS Counter */
+.fps-counter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #00ff00;
+  font-family: monospace;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .controls-overlay {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .vr-button,
+  .cardboard-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .cardboard-button svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* VR Mode */
+.enhanced-vr-experience.vr-mode {
+  .controls-overlay,
+  .fps-counter {
+    display: none;
+  }
+}
+
+/* Cardboard Mode */
+.enhanced-vr-experience.cardboard {
+  .controls-overlay {
+    display: none;
+  }
+}
+
+/* Mobile styles */
+.enhanced-vr-experience.mobile {
+  height: 100vh;
+  touch-action: none;
+}
+
+/* Time period selector */
+.time-period-selector {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.time-period-selector button {
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: 1px solid white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.time-period-selector button.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #00ff00;
+}
+
+.time-period-selector button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Loading and error states */
+.loading-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+.error-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .time-period-selector {
+    flex-direction: column;
+    bottom: 80px;
+  }
+
+  .vr-button,
+  .cardboard-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* VR mode specific styles */
+@media (display-mode: vr) {
+  .enhanced-vr-experience {
+    cursor: none;
+  }
+
+  .time-period-selector {
+    display: none;
+  }
+}
+
+/* VR Controls */
+.vr-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.vr-controls button {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.vr-controls button:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* Hotspot Styles */
+.hotspot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.hotspot:hover {
+  transform: scale(1.2);
+}
+
+.hotspot-info {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  max-width: 200px;
+  pointer-events: none;
+}
+
+.loading-progress {
+  width: 200px;
+  height: 4px;
+  background: #333;
+  margin-top: 20px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-progress-bar {
+  height: 100%;
+  background: #4299e1;
+  transition: width 0.3s;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .time-period-selector {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .time-period-selector button {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  .vr-controls {
+    bottom: 10px;
+  }
+
+  .vr-controls button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+} 

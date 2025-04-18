@@ -16,5 +16,6 @@ export default defineConfig({
         secure: false
       }
     }
-  }
+  },
+  base: '/Culture-Sphere/',
 });
