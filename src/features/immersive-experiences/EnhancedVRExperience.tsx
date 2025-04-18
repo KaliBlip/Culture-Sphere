@@ -6,7 +6,7 @@ import { XRTargetRaySpace } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { LoadingScreen } from '../../components/LoadingScreen';
-import { Hotspot } from '../../components/VRPanoramaViewer';
+import { Hotspot } from '../../types/hotspot';
 import './styles/EnhancedVRExperience.css';
 import { WebGLRenderer } from 'three';
 
@@ -67,7 +67,6 @@ export const EnhancedVRExperience: React.FC<EnhancedVRExperienceProps> = ({
   const audioLoader = new THREE.AudioLoader();
   const audioContext = useRef<AudioContext | null>(null);
   const audioListener = useRef<THREE.AudioListener | null>(null);
-  const modelLoader = new THREE.GLTFLoader();
   const environmentMap = useRef<THREE.Texture | null>(null);
   const [isCardboardMode, setIsCardboardMode] = useState(false);
   const [isMobile, setIsMobile] = useState(false);

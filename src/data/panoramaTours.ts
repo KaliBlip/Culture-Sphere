@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Hotspot } from '../components/VRPanoramaViewer';
+import { Hotspot } from '../types/hotspot';
 
 export interface PanoramaLocation {
   id: string;
@@ -17,12 +17,14 @@ export const sampleTour: PanoramaLocation[] = [
     imageUrl: '/panoramas/venice_sunset_1k.hdr',
     hotspots: [
       {
+        id: 'grand-canal',
         position: new THREE.Vector3(0, 1.6, -10),
         title: 'Grand Canal',
         description: 'The main waterway of Venice, lined with historic buildings',
         audioUrl: '/audio/venice_canal.mp3'
       },
       {
+        id: 'gondola-station',
         position: new THREE.Vector3(5, 1.6, -8),
         title: 'Gondola Station',
         description: 'Traditional Venetian boats ready for a romantic ride',
@@ -37,12 +39,14 @@ export const sampleTour: PanoramaLocation[] = [
     imageUrl: '/panoramas/grand_canyon_1k.hdr',
     hotspots: [
       {
+        id: 'south-rim',
         position: new THREE.Vector3(0, 1.6, -15),
         title: 'South Rim',
         description: 'The most popular viewpoint of the Grand Canyon',
         audioUrl: '/audio/grand_canyon_south_rim.mp3'
       },
       {
+        id: 'colorado-river',
         position: new THREE.Vector3(-8, 1.6, -12),
         title: 'Colorado River',
         description: 'The mighty river that carved this natural wonder',
@@ -57,12 +61,14 @@ export const sampleTour: PanoramaLocation[] = [
     imageUrl: '/panoramas/temple_heaven_1k.hdr',
     hotspots: [
       {
+        id: 'hall-of-prayer',
         position: new THREE.Vector3(0, 1.6, -12),
         title: 'Hall of Prayer',
         description: 'The iconic circular building used for ceremonies',
         audioUrl: '/audio/temple_heaven_hall.mp3'
       },
       {
+        id: 'imperial-vault',
         position: new THREE.Vector3(6, 1.6, -10),
         title: 'Imperial Vault',
         description: 'A smaller circular building with intricate designs',

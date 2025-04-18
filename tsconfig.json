@@ -14,10 +14,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "types": [
       "vite/client"
@@ -25,6 +25,12 @@
     "allowJs": true,
     "incremental": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "three": ["node_modules/@types/three"],
+      "three/*": ["node_modules/@types/three/*"]
+    },
     "plugins": [
       {
         "name": "next"

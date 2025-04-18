@@ -1,25 +1,30 @@
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { VRVideoViewer } from '../components/VRVideoViewer';
+import { getVideo, Video, testApiConnection } from '../services/pexelsVideos';
 import * as THREE from 'three';
+import { Hotspot } from '../types/hotspot';
 import { VirtualTour } from '../components/VirtualTour';
 
-// Sample data for demonstration
-const sampleHotspots = [
+// Sample hotspots for demonstration
+const sampleHotspots: Hotspot[] = [
   {
-    position: new THREE.Vector3(0, 1, 0),
-    title: "Main Entrance",
-    description: "The grand entrance to the historical site, featuring intricate carvings from the 12th century.",
-    audioUrl: "/audio/entrance.mp3"
+    id: 'main-entrance',
+    position: new THREE.Vector3(0, 0, -10),
+    title: 'Main Entrance',
+    description: 'The grand entrance to the heritage site'
   },
   {
-    position: new THREE.Vector3(2, 0.5, -1),
-    title: "Central Courtyard",
-    description: "The heart of the complex, where daily activities and ceremonies took place.",
-    audioUrl: "/audio/courtyard.mp3"
+    id: 'historical-artifact',
+    position: new THREE.Vector3(10, 0, 0),
+    title: 'Historical Artifact',
+    description: 'A significant artifact from the site\'s history'
   },
   {
-    position: new THREE.Vector3(-1, 0.8, 1.5),
-    title: "Ancient Artifacts",
-    description: "A collection of artifacts discovered during archaeological excavations.",
-    audioUrl: "/audio/artifacts.mp3"
+    id: 'viewpoint',
+    position: new THREE.Vector3(-10, 0, 0),
+    title: 'Viewpoint',
+    description: 'A scenic viewpoint of the surrounding area'
   }
 ];
 

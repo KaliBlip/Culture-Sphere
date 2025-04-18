@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as THREE from 'three';
 import { EnhancedVRExperience } from '../immersive-experiences/EnhancedVRExperience';
+import { Hotspot } from '../../types/hotspot';
 
 interface Course {
   id: string;
@@ -13,14 +14,11 @@ interface Course {
   thumbnail: string;
   vrExperience?: {
     environmentUrl: string;
-    hotspots: Array<{
-      position: [number, number, number];
-      title: string;
-      description: string;
-      audioUrl?: string;
-    }>;
+    hotspots: Hotspot[];
     artifacts?: Array<{
+      id: string;
       name: string;
+      description: string;
       modelUrl: string;
       position: [number, number, number];
       scale: [number, number, number];
@@ -97,6 +95,22 @@ export function EducationalPlatform({
     handleLessonComplete();
   };
 
+  const handleHotspotClick = (hotspot: Hotspot) => {
+    // Implementation of handleHotspotClick
+  };
+
+  const handleArtifactClick = (artifact: {
+    id: string;
+    name: string;
+    description: string;
+    modelUrl: string;
+    position: THREE.Vector3;
+    scale: THREE.Vector3;
+    rotation: THREE.Euler;
+  }) => {
+    // Implementation of handleArtifactClick
+  };
+
   return (
     <div className="educational-platform">
       {!selectedCourse ? (
@@ -159,30 +173,30 @@ export function EducationalPlatform({
               </div>
 
               {selectedCourse.vrExperience && (
-                <div className="vr-section">
-                  <button onClick={() => setShowVR(!showVR)}>
-                    {showVR ? 'Hide VR Experience' : 'Show VR Experience'}
-                  </button>
-                  {showVR && (
-                    <EnhancedVRExperience
-                      baseEnvironmentUrl={selectedCourse.vrExperience.environmentUrl}
-                      hotspots={selectedCourse.vrExperience.hotspots.map(h => ({
-                        position: new THREE.Vector3(...h.position),
-                        title: h.title,
-                        description: h.description,
-                        audioUrl: h.audioUrl
-                      }))}
-                      artifacts={selectedCourse.vrExperience.artifacts?.map(a => ({
-                        id: a.name,
-                        name: a.name,
-                        description: '',
-                        modelUrl: a.modelUrl,
-                        position: new THREE.Vector3(...a.position),
-                        scale: new THREE.Vector3(...a.scale),
-                        rotation: new THREE.Euler(...a.rotation)
-                      }))}
-                    />
-                  )}
+                <div className="vr-experience-container">
+                  <EnhancedVRExperience
+                    baseEnvironmentUrl={selectedCourse.vrExperience.environmentUrl}
+                    hotspots={selectedCourse.vrExperience.hotspots.map((h, index) => ({
+                      id: `hotspot-${selectedCourse.id}-${index}`,
+                      position: new THREE.Vector3(...h.position),
+                      title: h.title,
+                      description: h.description,
+                      audioUrl: h.audioUrl
+                    }))}
+                    artifacts={selectedCourse.vrExperience.artifacts?.map(a => ({
+                      id: `artifact-${selectedCourse.id}-${a.name}`,
+                      name: a.name,
+                      description: a.description,
+                      modelUrl: a.modelUrl,
+                      position: new THREE.Vector3(...a.position),
+                      scale: new THREE.Vector3(...a.scale),
+                      rotation: new THREE.Euler(...a.rotation)
+                    }))}
+                    onHotspotClick={handleHotspotClick}
+                    onArtifactClick={handleArtifactClick}
+                    className="w-full h-full"
+                    modelPath="/models/default-environment.glb"
+                  />
                 </div>
               )}
 

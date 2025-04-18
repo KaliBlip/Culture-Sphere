@@ -2,13 +2,7 @@ import { useState } from 'react';
 import { ThreeDViewer } from './ThreeDViewer';
 import { HotspotInfoPanel } from './HotspotInfoPanel';
 import { ArrowLeft, ArrowRight, Play, Pause } from 'lucide-react';
-
-interface Hotspot {
-  position: THREE.Vector3;
-  title: string;
-  description: string;
-  audioUrl?: string;
-}
+import { Hotspot } from '../types/hotspot';
 
 interface VirtualTourProps {
   modelUrl: string;

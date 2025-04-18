@@ -3,12 +3,15 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { VRButton } from 'three/examples/jsm/webxr/VRButton';
 import { LoadingScreen } from './LoadingScreen';
+import { XRTargetRaySpace } from 'three';
+import { Hotspot } from '../types/hotspot';
 
-export interface Hotspot {
-  position: THREE.Vector3;
-  title: string;
-  description: string;
-  audioUrl?: string;
+interface XRControllerWithGamepad extends XRTargetRaySpace {
+  gamepad?: {
+    hapticActuators?: {
+      pulse: (value: number, duration: number) => void;
+    }[];
+  };
 }
 
 interface VRPanoramaViewerProps {
@@ -68,7 +71,8 @@ export function VRPanoramaViewer({
     // Initialize renderer with WebXR support
     const renderer = new THREE.WebGLRenderer({ 
       antialias: true,
-      xr: true
+      alpha: true,
+      powerPreference: 'high-performance'
     });
     renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -201,9 +205,13 @@ export function VRPanoramaViewer({
       setActiveController(null);
     });
 
-    const handleControllerSelect = (controller: THREE.XRTargetRaySpace) => {
+    const handleControllerSelect = (controller: XRControllerWithGamepad) => {
+      const tempMatrix = new THREE.Matrix4();
       const raycaster = new THREE.Raycaster();
-      raycaster.setFromXRController(controller);
+      
+      tempMatrix.identity().extractRotation(controller.matrixWorld);
+      raycaster.ray.origin.setFromMatrixPosition(controller.matrixWorld);
+      raycaster.ray.direction.set(0, 0, -1).applyMatrix4(tempMatrix);
       
       const intersects = raycaster.intersectObjects(hotspotMeshes);
       if (intersects.length > 0) {
@@ -211,10 +219,9 @@ export function VRPanoramaViewer({
         if (object.userData.hotspot && onHotspotClick) {
           onHotspotClick(object.userData.hotspot);
           
-          // Trigger haptic feedback
-          const gamepad = controller.userData.gamepad;
-          if (gamepad && gamepad.hapticActuators && gamepad.hapticActuators[0]) {
-            gamepad.hapticActuators[0].pulse(0.5, 100);
+          // Trigger haptic feedback if available
+          if (controller.gamepad?.hapticActuators?.[0]) {
+            controller.gamepad.hapticActuators[0].pulse(0.5, 100);
           }
         }
       }

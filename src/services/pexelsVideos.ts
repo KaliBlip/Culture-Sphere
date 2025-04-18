@@ -81,6 +81,15 @@ export interface VideoSearchResponse {
   prev_page?: string;
 }
 
+interface VideoFile {
+  id: number;
+  quality: string;
+  file_type: string;
+  width: number;
+  height: number;
+  link: string;
+}
+
 export const searchVideos = async (query: string, page = 1, perPage = 15): Promise<VideoSearchResponse> => {
   try {
     const response = await pexelsVideoApi.get('/search', {
@@ -117,7 +126,7 @@ export const getVideo = async (id: number): Promise<Video> => {
     const response = await pexelsVideoApi.get(`/videos/${id}`);
     // Update video URLs to use proxied URLs
     const video = response.data;
-    video.video_files = video.video_files.map(file => ({
+    video.video_files = video.video_files.map((file: VideoFile) => ({
       ...file,
       link: getProxiedVideoUrl(file.link)
     }));

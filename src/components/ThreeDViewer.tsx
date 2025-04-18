@@ -2,13 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-
-interface Hotspot {
-  position: THREE.Vector3;
-  title: string;
-  description: string;
-  audioUrl?: string;
-}
+import { Hotspot } from '../types/hotspot';
 
 interface ThreeDViewerProps {
   modelUrl?: string;
