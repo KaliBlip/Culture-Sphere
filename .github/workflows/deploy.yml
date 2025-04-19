@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write  # Grants necessary permissions for pushing to gh-pages
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -21,11 +24,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Build the project
         run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist 
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Uses repository's GitHub token
+          publish_dir: ./dist  # Directory containing the built files
