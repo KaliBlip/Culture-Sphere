@@ -17,5 +17,5 @@ export default defineConfig({
       }
     }
   },
-  base: '/src/',
+  base: '/Culture-Sphere/src/',
 });
