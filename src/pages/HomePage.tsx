@@ -31,7 +31,7 @@ const HomePage: React.FC = () => {
               {
                 title: 'Machu Picchu',
                 description: 'Ancient Incan citadel in the Andes',
-                image: '/images/machu-picchu.jpg'
+                image: `${import.meta.env.BASE_URL}images/machu-picchu.jpg`
               },
               {
                 title: 'Great Wall of China',
@@ -119,4 +119,4 @@ const HomePage: React.FC = () => {
   );
 }; 
 
-export default HomePage; 
+export default HomePage;
