@@ -1,163 +1,196 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Filter, Search, Clock, Map } from 'lucide-react';
-import { useState } from 'react';
+import { Globe, MapPin, Calendar, Clock, Award, ArrowRight } from 'lucide-react';
+import '../pages/styles/HomePage.css';
 
-export function HeritageSitesPage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-
-  const categories = [
-    { id: 'all', name: 'All Sites' },
-    { id: 'unesco', name: 'UNESCO World Heritage' },
-    { id: 'national', name: 'National Heritage' },
-    { id: 'religious', name: 'Religious Sites' },
-    { id: 'archaeological', name: 'Archaeological Sites' }
-  ];
-
-  const sites = [
-    {
-      id: 1,
-      title: 'Ancient Temple Complex',
-      location: 'Kathmandu, Nepal',
-      category: 'unesco',
-      description: 'A magnificent temple complex dating back to the 12th century, featuring intricate carvings and stunning architecture.',
-      imageUrl: '/images/heritage/temple.jpg',
-      year: '12th Century'
-    },
-    {
-      id: 2,
-      title: 'Royal Palace',
-      location: 'Bhaktapur, Nepal',
-      category: 'national',
-      description: 'Former royal residence showcasing traditional Newari architecture and historical artifacts.',
-      imageUrl: '/images/heritage/palace.jpg',
-      year: '15th Century'
-    },
-    {
-      id: 3,
-      title: 'Ancient Stupa',
-      location: 'Lalitpur, Nepal',
-      category: 'religious',
-      description: 'One of the oldest Buddhist stupas in the world, surrounded by prayer wheels and monasteries.',
-      imageUrl: '/images/heritage/stupa.jpg',
-      year: '3rd Century BCE'
-    }
-  ];
-
-  const filteredSites = sites.filter(site => {
-    const matchesSearch = site.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         site.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         site.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || site.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
-
+export const HeritageSitesPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Heritage Sites</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover and explore our rich cultural heritage through these remarkable sites.
-            Each location tells a unique story of our past and present.
+    <div className="vr-gradient min-h-screen text-white">
+      {/* Hero Section */}
+      <section className="vr-hero">
+        <div className="vr-hero-content">
+          <h1 className="vr-hero-title vr-heading">
+            Heritage Sites
+          </h1>
+          <p className="vr-hero-subtitle vr-subheading">
+            Discover and explore UNESCO World Heritage Sites from around the globe
           </p>
         </div>
+      </section>
 
-        <div className="mb-8">
-          <div className="flex flex-col md:flex-row gap-4 mb-6">
-            <div className="relative flex-grow">
-              <input
-                type="text"
-                placeholder="Search heritage sites..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2 pl-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-              <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-            </div>
-            <div className="flex items-center gap-2">
-              <Filter className="h-5 w-5 text-gray-600" />
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              >
-                {categories.map(category => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="text-sm text-gray-500">
-            Showing {filteredSites.length} of {sites.length} sites
+      {/* Featured Sites Section */}
+      <section className="vr-section">
+        <div className="vr-container">
+          <h2 className="vr-heading text-3xl mb-8 text-center">Featured Heritage Sites</h2>
+          <div className="vr-grid">
+            {[
+              {
+                id: 'angkor-wat',
+                title: 'Angkor Wat',
+                location: 'Cambodia',
+                year: '12th Century',
+                status: 'UNESCO World Heritage',
+                description: 'The largest religious monument in the world, originally constructed as a Hindu temple',
+                image: '/images/heritage/angkor-wat.jpg',
+                highlights: [
+                  'Ancient Khmer architecture',
+                  'Intricate bas-reliefs',
+                  'Sunrise viewpoints',
+                  'Temple complex'
+                ]
+              },
+              {
+                id: 'petra',
+                title: 'Petra',
+                location: 'Jordan',
+                year: '312 BC',
+                status: 'UNESCO World Heritage',
+                description: 'The Rose City, an ancient Nabataean city carved into pink sandstone cliffs',
+                image: '/images/heritage/petra.jpg',
+                highlights: [
+                  'The Treasury (Al-Khazneh)',
+                  'The Monastery',
+                  'Royal Tombs',
+                  'Ancient water system'
+                ]
+              },
+              {
+                id: 'taj-mahal',
+                title: 'Taj Mahal',
+                location: 'India',
+                year: '17th Century',
+                status: 'UNESCO World Heritage',
+                description: 'An ivory-white marble mausoleum, one of the New Seven Wonders of the World',
+                image: '/images/heritage/taj-mahal.jpg',
+                highlights: [
+                  'Marble inlay work',
+                  'Symmetrical gardens',
+                  'Moonlight views',
+                  'Mughal architecture'
+                ]
+              },
+              {
+                id: 'acropolis',
+                title: 'Acropolis of Athens',
+                location: 'Greece',
+                year: '5th Century BC',
+                status: 'UNESCO World Heritage',
+                description: 'The ancient citadel containing the remains of several ancient buildings',
+                image: '/images/heritage/acropolis.jpg',
+                highlights: [
+                  'Parthenon temple',
+                  'Erechtheion',
+                  'Propylaea gateway',
+                  'Ancient theater'
+                ]
+              }
+            ].map((site) => (
+              <div key={site.id} className="vr-card group">
+                <div className="relative overflow-hidden rounded-t-lg">
+                  <img 
+                    src={site.image} 
+                    alt={site.title}
+                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                </div>
+                <div className="p-6">
+                  <h3 className="vr-heading text-xl mb-2">{site.title}</h3>
+                  <div className="flex items-center space-x-4 mb-4">
+                    <div className="flex items-center text-sm text-blue-400">
+                      <MapPin className="w-4 h-4 mr-1" />
+                      {site.location}
+                    </div>
+                    <div className="flex items-center text-sm text-blue-400">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      {site.year}
+                    </div>
+                    <div className="flex items-center text-sm text-blue-400">
+                      <Award className="w-4 h-4 mr-1" />
+                      {site.status}
+                    </div>
+                  </div>
+                  <p className="vr-paragraph text-gray-300 mb-4">{site.description}</p>
+                  <div className="mb-4">
+                    <h4 className="text-sm font-semibold mb-2">Highlights:</h4>
+                    <ul className="grid grid-cols-2 gap-2">
+                      {site.highlights.map((highlight, index) => (
+                        <li key={index} className="flex items-center text-sm text-gray-300">
+                          <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2" />
+                          {highlight}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <Link 
+                    to={`/heritage-sites/${site.id}`}
+                    className="vr-button inline-flex items-center justify-center w-full"
+                  >
+                    Explore Site <ArrowRight className="ml-2" />
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredSites.map((site) => (
-            <div key={site.id} className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-              <div className="h-48 bg-gray-800 relative">
-                <div className="absolute inset-0 bg-black opacity-40"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Map className="h-12 w-12 text-white" />
+      {/* Categories Section */}
+      <section className="vr-section bg-opacity-50">
+        <div className="vr-container">
+          <h2 className="vr-heading text-3xl mb-12 text-center">Explore by Region</h2>
+          <div className="vr-grid">
+            {[
+              {
+                icon: <Globe className="vr-icon" />,
+                title: 'Asia & Pacific',
+                count: '28 Sites',
+                description: 'Ancient temples, palaces, and cultural landscapes'
+              },
+              {
+                icon: <MapPin className="vr-icon" />,
+                title: 'Europe & North America',
+                count: '35 Sites',
+                description: 'Historic cities, castles, and archaeological sites'
+              },
+              {
+                icon: <Calendar className="vr-icon" />,
+                title: 'Africa',
+                count: '15 Sites',
+                description: 'Ancient civilizations and natural wonders'
+              },
+              {
+                icon: <Award className="vr-icon" />,
+                title: 'Latin America',
+                count: '22 Sites',
+                description: 'Pre-Columbian cities and colonial heritage'
+              }
+            ].map((region, index) => (
+              <div key={index} className="vr-feature-card">
+                <div className="vr-feature-icon">
+                  {region.icon}
                 </div>
+                <h3 className="vr-heading text-xl mb-2">{region.title}</h3>
+                <p className="text-blue-400 mb-2">{region.count}</p>
+                <p className="vr-paragraph text-gray-300">{region.description}</p>
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{site.title}</h3>
-                <div className="flex items-center text-gray-600 mb-2">
-                  <MapPin className="h-4 w-4 mr-1" />
-                  <span>{site.location}</span>
-                </div>
-                <div className="flex items-center text-gray-600 mb-4">
-                  <Clock className="h-4 w-4 mr-1" />
-                  <span>{site.year}</span>
-                </div>
-                <p className="text-gray-600 mb-4 line-clamp-2">{site.description}</p>
-                <Link
-                  to={`/heritage-sites/${site.id}`}
-                  className="text-indigo-600 font-semibold hover:text-indigo-800"
-                >
-                  Learn More →
-                </Link>
-              </div>
-            </div>
-          ))}
-
-          {filteredSites.length === 0 && (
-            <div className="col-span-full text-center py-12">
-              <p className="text-gray-500 text-lg">No heritage sites found matching your search criteria.</p>
-            </div>
-          )}
-
-          {/* Coming Soon Placeholders */}
-          {filteredSites.length > 0 && (
-            <>
-              <div className="bg-white rounded-lg overflow-hidden shadow-lg">
-                <div className="h-48 bg-purple-900"></div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Coming Soon</h3>
-                  <p className="text-gray-600 mb-4">
-                    More heritage sites will be added to our collection.
-                  </p>
-                  <span className="text-gray-400 font-semibold">Stay Tuned</span>
-                </div>
-              </div>
-              <div className="bg-white rounded-lg overflow-hidden shadow-lg">
-                <div className="h-48 bg-green-900"></div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Coming Soon</h3>
-                  <p className="text-gray-600 mb-4">
-                    More heritage sites will be added to our collection.
-                  </p>
-                  <span className="text-gray-400 font-semibold">Stay Tuned</span>
-                </div>
-              </div>
-            </>
-          )}
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="vr-section">
+        <div className="vr-container text-center">
+          <h2 className="vr-heading text-3xl mb-4">Start Your Journey</h2>
+          <p className="vr-paragraph text-gray-300 mb-8 max-w-2xl mx-auto">
+            Explore the world's most significant cultural and natural heritage sites through our immersive experiences.
+          </p>
+          <Link to="/explore" className="vr-button inline-flex items-center">
+            Discover More <ArrowRight className="ml-2" />
+          </Link>
+        </div>
+      </section>
     </div>
   );
-} 
+}; 

@@ -27,6 +27,9 @@ export function Navigation() {
             <Link to="/heritage-sites" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">
               Heritage Sites
             </Link>
+            <Link to="/marketplace" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">
+              Marketplace
+            </Link>
             <Link to="/about" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">
               About
             </Link>
@@ -68,6 +71,13 @@ export function Navigation() {
             onClick={() => setIsMenuOpen(false)}
           >
             Heritage Sites
+          </Link>
+          <Link
+            to="/marketplace"
+            className="block px-4 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Marketplace
           </Link>
           <Link
             to="/about"

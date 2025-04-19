@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Home, BookOpen, Globe, Camera, Users, Menu, Phone, X } from 'lucide-react';
+import { Home, BookOpen, Globe, Camera, Users, Menu, Phone, X, ShoppingCart } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Layout } from './components/Layout';
-import { HomePage } from './pages/HomePage';
-import { AboutPage } from './pages/AboutPage';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { PanoramaTourPage } from './pages/PanoramaTourPage';
 import { VirtualToursPage } from './pages/VirtualToursPage';
@@ -12,6 +12,7 @@ import { VirtualTourDetailPage } from './pages/VirtualTourDetailPage';
 import { HeritageSitesPage } from './pages/HeritageSitesPage';
 import { HeritageSiteDetailPage } from './pages/HeritageSiteDetailPage';
 import { ContentViewerDemo } from './pages/ContentViewerDemo';
+import { MarketplacePage } from './pages/MarketplacePage';
 
 function NavLink({ to, icon: Icon, children }: { to: string; icon: any; children: React.ReactNode }) {
   const location = useLocation();
@@ -60,7 +61,7 @@ function App() {
   }, []);
 
   return (
-    <Router>
+    <Router basename="/Culture-Sphere">
       <div className="min-h-screen bg-gray-50">
         {/* Mobile Menu Button */}
         <div className="lg:hidden fixed top-4 right-4 z-50">
@@ -149,6 +150,7 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/panorama/:tourId" element={<PanoramaTourPage />} />
+            <Route path="/marketplace" element={<MarketplacePage />} />
           </Routes>
         </div>
       </div>
