@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write-all  # Grants full permissions for the workflow
+      contents: write  # Grants write permissions for the workflow
 
     steps:
       - name: Checkout repository
